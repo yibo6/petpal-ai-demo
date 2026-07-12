@@ -10,16 +10,39 @@ const recordCancel = document.querySelector("#record-cancel");
 const recordList = document.querySelector("#record-list");
 const recordCount = document.querySelector("#record-count");
 const reportSummaryText = document.querySelector("#report-summary-text");
+const onboarding = document.querySelector("#onboarding");
+const createPetForm = document.querySelector("#create-pet-form");
+const editPetForm = document.querySelector("#edit-pet-form");
+const homePetMeta = document.querySelector("#home-pet-meta");
+const profilePetMeta = document.querySelector("#profile-pet-meta");
+const profileWeight = document.querySelector("#profile-weight");
+const profileAllergy = document.querySelector("#profile-allergy");
+const profileNotes = document.querySelector("#profile-notes");
+const aiBreedTag = document.querySelector("#ai-breed-tag");
+const aiAgeTag = document.querySelector("#ai-age-tag");
 
-const storageKey = "petpal-health-records";
+const recordStorageKey = "petpal-health-records";
+const petStorageKey = "petpal-current-pet";
 let activeRecordType = "饮食";
 let memoryRecords = null;
+let currentPet = null;
 
 const titles = {
   home: "首页看板",
   profile: "宠物档案",
   chat: "AI 照护问答",
   report: "健康周报",
+};
+
+const defaultPet = {
+  id: "pet-demo",
+  name: "Lucky",
+  species: "狗狗",
+  breed: "边境牧羊犬",
+  gender: "公",
+  age: "2 岁 4 个月",
+  weight: "18.6kg",
+  notes: "鸡肉零食可能引起皮肤瘙痒，近期换粮中。",
 };
 
 const recordConfig = {
@@ -121,6 +144,21 @@ recordForm.addEventListener("submit", (event) => {
   renderRecords();
 });
 
+createPetForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  currentPet = getPetFromForm(createPetForm);
+  savePet(currentPet);
+  onboarding.classList.remove("active");
+  renderPet();
+});
+
+editPetForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  currentPet = getPetFromForm(editPetForm);
+  savePet(currentPet);
+  renderPet();
+});
+
 const askForm = document.querySelector("#ask-form");
 const chatBox = document.querySelector(".chat-box");
 
@@ -130,6 +168,7 @@ askForm.addEventListener("submit", (event) => {
   const question = document.querySelector("#question").value.trim();
   if (!question) return;
 
+  const pet = currentPet || defaultPet;
   const records = getRecords().slice(0, 3);
   const recentContext = records.map((record) => `${record.type}：${record.detail}`).join("；");
 
@@ -141,7 +180,7 @@ askForm.addEventListener("submit", (event) => {
   aiMessage.className = "message ai";
   aiMessage.innerHTML = `
     <p><strong>风险等级：低到中</strong></p>
-    <p>我会结合 Lucky 的档案和近期记录来判断。最近记录显示：${escapeHtml(recentContext || "暂无新增记录")}。</p>
+    <p>我会结合 ${escapeHtml(pet.name)} 的档案来判断：${escapeHtml(pet.breed)}，${escapeHtml(pet.age)}，体重 ${escapeHtml(pet.weight)}。最近记录显示：${escapeHtml(recentContext || "暂无新增记录")}。</p>
     <p>建议继续记录饮食、排便和精神状态。如果 48 小时内没有改善，或同时出现呕吐、便血、精神下降，应及时咨询兽医。</p>
   `;
 
@@ -149,7 +188,90 @@ askForm.addEventListener("submit", (event) => {
   aiMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
+initPet();
 renderRecords();
+
+function initPet() {
+  currentPet = getSavedPet();
+
+  if (!currentPet) {
+    fillPetForm(createPetForm, defaultPet);
+    onboarding.classList.add("active");
+    currentPet = defaultPet;
+  } else {
+    onboarding.classList.remove("active");
+  }
+
+  fillPetForm(editPetForm, currentPet);
+  renderPet();
+}
+
+function getSavedPet() {
+  try {
+    const saved = localStorage.getItem(petStorageKey);
+    if (!saved) return null;
+
+    const parsed = JSON.parse(saved);
+    return parsed && parsed.name ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function savePet(pet) {
+  try {
+    localStorage.setItem(petStorageKey, JSON.stringify(pet));
+  } catch {
+    // file:// previews can restrict storage; the current UI still reflects the edit.
+  }
+}
+
+function getPetFromForm(form) {
+  const data = new FormData(form);
+  return {
+    id: currentPet?.id || `pet-${Date.now()}`,
+    name: String(data.get("name") || "").trim() || defaultPet.name,
+    species: String(data.get("species") || defaultPet.species),
+    breed: String(data.get("breed") || "").trim() || defaultPet.breed,
+    gender: String(data.get("gender") || defaultPet.gender),
+    age: String(data.get("age") || "").trim() || defaultPet.age,
+    weight: String(data.get("weight") || "").trim() || defaultPet.weight,
+    notes: String(data.get("notes") || "").trim(),
+  };
+}
+
+function fillPetForm(form, pet) {
+  form.elements.name.value = pet.name;
+  form.elements.species.value = pet.species;
+  form.elements.breed.value = pet.breed;
+  form.elements.gender.value = pet.gender;
+  form.elements.age.value = pet.age;
+  form.elements.weight.value = pet.weight;
+  form.elements.notes.value = pet.notes;
+}
+
+function renderPet() {
+  const pet = currentPet || defaultPet;
+  document.querySelectorAll("[data-pet-name]").forEach((item) => {
+    item.textContent = pet.name;
+  });
+
+  homePetMeta.textContent = `${pet.age} · ${pet.breed} · ${pet.weight}`;
+  profilePetMeta.textContent = `${pet.breed} · ${pet.gender} · ${pet.age}`;
+  profileWeight.textContent = pet.weight;
+  profileAllergy.textContent = extractAllergy(pet.notes);
+  profileNotes.textContent = pet.notes || "暂无特殊健康备注。";
+  aiBreedTag.textContent = pet.breed;
+  aiAgeTag.textContent = pet.age;
+  fillPetForm(editPetForm, pet);
+}
+
+function extractAllergy(notes) {
+  if (!notes) return "暂无";
+  if (notes.includes("鸡肉")) return "鸡肉";
+  if (notes.includes("过敏")) return "有备注";
+  return "暂无";
+}
 
 function openRecordForm(type) {
   const config = recordConfig[type];
@@ -164,7 +286,7 @@ function getRecords() {
   if (memoryRecords) return memoryRecords;
 
   try {
-    const saved = localStorage.getItem(storageKey);
+    const saved = localStorage.getItem(recordStorageKey);
     if (!saved) return seedRecords;
 
     const parsed = JSON.parse(saved);
@@ -178,7 +300,7 @@ function saveRecords(records) {
   memoryRecords = records;
 
   try {
-    localStorage.setItem(storageKey, JSON.stringify(records));
+    localStorage.setItem(recordStorageKey, JSON.stringify(records));
   } catch {
     // Some file:// previews can restrict storage; the UI still updates for this session.
   }

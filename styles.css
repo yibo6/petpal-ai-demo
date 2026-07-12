@@ -30,7 +30,9 @@ body {
 }
 
 button,
-textarea {
+textarea,
+input,
+select {
   font: inherit;
 }
 
@@ -56,6 +58,41 @@ button {
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  position: relative;
+}
+
+.onboarding {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  gap: 18px;
+  align-content: start;
+  padding: 28px 20px;
+  overflow-y: auto;
+  background: #fbfdfc;
+}
+
+.onboarding.active {
+  display: grid;
+}
+
+.onboarding-header {
+  padding: 18px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #e5f7f2 100%);
+  border: 1px solid var(--line);
+}
+
+.onboarding-header h1 {
+  margin-bottom: 8px;
+}
+
+.onboarding-header p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .app-header {
@@ -113,7 +150,8 @@ h3 {
 .tab,
 .quick-grid button,
 .ask-form button,
-.record-form button {
+.record-form button,
+.pet-form button {
   border: 0;
 }
 
@@ -427,6 +465,50 @@ svg {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
+}
+
+.pet-form {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.pet-form.compact {
+  border-color: var(--teal);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pet-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pet-form input,
+.pet-form select,
+.pet-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.pet-form textarea {
+  resize: none;
 }
 
 .record-form {

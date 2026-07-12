@@ -9,6 +9,54 @@
   <body>
     <main class="shell" aria-label="PetPal AI 手机端 Demo">
       <section class="phone">
+        <section class="onboarding active" id="onboarding" aria-label="创建宠物档案">
+          <div class="onboarding-header">
+            <p class="eyebrow">PetPal AI</p>
+            <h1>先创建宠物档案</h1>
+            <p>AI 会根据宠物年龄、品种、体重和健康记录，给出更个性化的照护建议。</p>
+          </div>
+
+          <form class="pet-form" id="create-pet-form">
+            <div class="form-grid">
+              <label>
+                宠物名字
+                <input name="name" value="Lucky" required />
+              </label>
+              <label>
+                种类
+                <select name="species">
+                  <option>狗狗</option>
+                  <option>猫咪</option>
+                </select>
+              </label>
+              <label>
+                品种
+                <input name="breed" value="边境牧羊犬" required />
+              </label>
+              <label>
+                性别
+                <select name="gender">
+                  <option>公</option>
+                  <option>母</option>
+                </select>
+              </label>
+              <label>
+                年龄
+                <input name="age" value="2 岁 4 个月" required />
+              </label>
+              <label>
+                体重
+                <input name="weight" value="18.6kg" required />
+              </label>
+            </div>
+            <label>
+              过敏史 / 既往病史
+              <textarea name="notes" rows="3">鸡肉零食可能引起皮肤瘙痒，近期换粮中。</textarea>
+            </label>
+            <button type="submit" class="primary-button">进入 PetPal AI</button>
+          </form>
+        </section>
+
         <header class="app-header">
           <div>
             <p class="eyebrow">PetPal AI</p>
@@ -37,8 +85,8 @@
               </div>
               <div>
                 <p class="label">今日状态</p>
-                <h2>Lucky 整体良好</h2>
-                <p class="muted">2 岁 4 个月 · 边牧 · 18.6kg</p>
+                <h2><span data-pet-name>Lucky</span> 整体良好</h2>
+                <p class="muted" id="home-pet-meta">2 岁 4 个月 · 边牧 · 18.6kg</p>
               </div>
             </div>
 
@@ -150,16 +198,60 @@
                   </svg>
                 </div>
                 <div>
-                  <h2>Lucky</h2>
-                  <p>边境牧羊犬 · 公 · 2 岁 4 个月</p>
+                  <h2 data-pet-name>Lucky</h2>
+                  <p id="profile-pet-meta">边境牧羊犬 · 公 · 2 岁 4 个月</p>
                 </div>
               </div>
               <div class="profile-stats">
-                <div><span>体重</span><strong>18.6kg</strong></div>
+                <div><span>体重</span><strong id="profile-weight">18.6kg</strong></div>
                 <div><span>绝育</span><strong>已完成</strong></div>
-                <div><span>过敏</span><strong>鸡肉</strong></div>
+                <div><span>过敏</span><strong id="profile-allergy">鸡肉</strong></div>
               </div>
             </section>
+
+            <form class="pet-form compact" id="edit-pet-form">
+              <div class="block-title">
+                <h3>编辑宠物档案</h3>
+                <span>保存到本地</span>
+              </div>
+              <div class="form-grid">
+                <label>
+                  宠物名字
+                  <input name="name" required />
+                </label>
+                <label>
+                  种类
+                  <select name="species">
+                    <option>狗狗</option>
+                    <option>猫咪</option>
+                  </select>
+                </label>
+                <label>
+                  品种
+                  <input name="breed" required />
+                </label>
+                <label>
+                  性别
+                  <select name="gender">
+                    <option>公</option>
+                    <option>母</option>
+                  </select>
+                </label>
+                <label>
+                  年龄
+                  <input name="age" required />
+                </label>
+                <label>
+                  体重
+                  <input name="weight" required />
+                </label>
+              </div>
+              <label>
+                过敏史 / 既往病史
+                <textarea name="notes" rows="3"></textarea>
+              </label>
+              <button type="submit" class="primary-button">保存档案</button>
+            </form>
 
             <section class="block">
               <div class="block-title">
@@ -189,7 +281,7 @@
               <div class="block-title">
                 <h3>健康备注</h3>
               </div>
-              <p class="note">近期换粮中，建议记录排便颜色、形态和稀度。既往无重大疾病史，鸡肉零食可能引起皮肤瘙痒。</p>
+              <p class="note" id="profile-notes"></p>
             </section>
           </section>
 
@@ -197,8 +289,8 @@
             <section class="context-card">
               <p class="label">AI 已参考</p>
               <div class="context-tags">
-                <span>边牧</span>
-                <span>2 岁 4 个月</span>
+                <span id="ai-breed-tag">边牧</span>
+                <span id="ai-age-tag">2 岁 4 个月</span>
                 <span>近期换粮</span>
                 <span>昨日软便</span>
               </div>
@@ -206,7 +298,7 @@
 
             <section class="chat-box" aria-label="AI 照护问答示例">
               <article class="message user">
-                <p>Lucky 昨天大便有点软，今天要不要停掉新粮？</p>
+                <p><span data-pet-name>Lucky</span> 昨天大便有点软，今天要不要停掉新粮？</p>
               </article>
               <article class="message ai">
                 <p><strong>风险等级：低到中</strong></p>
@@ -249,7 +341,7 @@
               <div class="block-title">
                 <h3>AI 总结</h3>
               </div>
-              <p class="note">Lucky 本周整体状态稳定，食欲和精神状态良好。周三开始换粮后，周五出现一次软便，建议下周放慢换粮节奏，并继续记录排便颜色、形态和稀度。</p>
+              <p class="note"><span data-pet-name>Lucky</span> 本周整体状态稳定，食欲和精神状态良好。周三开始换粮后，周五出现一次软便，建议下周放慢换粮节奏，并继续记录排便颜色、形态和稀度。</p>
             </section>
 
             <section class="block">
