@@ -20,6 +20,7 @@ const profileAllergy = document.querySelector("#profile-allergy");
 const profileNotes = document.querySelector("#profile-notes");
 const aiBreedTag = document.querySelector("#ai-breed-tag");
 const aiAgeTag = document.querySelector("#ai-age-tag");
+const avatarInputs = document.querySelectorAll('input[name="avatar"]');
 
 const recordStorageKey = "petpal-health-records";
 const petStorageKey = "petpal-current-pet";
@@ -43,6 +44,7 @@ const defaultPet = {
   age: "2 岁 4 个月",
   weight: "18.6kg",
   notes: "鸡肉零食可能引起皮肤瘙痒，近期换粮中。",
+  avatar: "",
 };
 
 const recordConfig = {
@@ -144,19 +146,33 @@ recordForm.addEventListener("submit", (event) => {
   renderRecords();
 });
 
-createPetForm.addEventListener("submit", (event) => {
+createPetForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  currentPet = getPetFromForm(createPetForm);
+  currentPet = await getPetFromForm(createPetForm);
   savePet(currentPet);
   onboarding.classList.remove("active");
   renderPet();
 });
 
-editPetForm.addEventListener("submit", (event) => {
+editPetForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  currentPet = getPetFromForm(editPetForm);
+  currentPet = await getPetFromForm(editPetForm);
   savePet(currentPet);
   renderPet();
+});
+
+avatarInputs.forEach((input) => {
+  input.addEventListener("change", async () => {
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const preview = input.closest(".avatar-upload")?.querySelector("[data-avatar-preview]");
+    const imageData = await readImageFile(file);
+    if (preview) {
+      preview.src = imageData;
+      preview.closest(".pet-avatar")?.classList.add("has-image");
+    }
+  });
 });
 
 const askForm = document.querySelector("#ask-form");
@@ -226,8 +242,11 @@ function savePet(pet) {
   }
 }
 
-function getPetFromForm(form) {
+async function getPetFromForm(form) {
   const data = new FormData(form);
+  const avatarFile = form.elements.avatar?.files?.[0];
+  const avatar = avatarFile ? await readImageFile(avatarFile) : currentPet?.avatar || "";
+
   return {
     id: currentPet?.id || `pet-${Date.now()}`,
     name: String(data.get("name") || "").trim() || defaultPet.name,
@@ -237,6 +256,7 @@ function getPetFromForm(form) {
     age: String(data.get("age") || "").trim() || defaultPet.age,
     weight: String(data.get("weight") || "").trim() || defaultPet.weight,
     notes: String(data.get("notes") || "").trim(),
+    avatar,
   };
 }
 
@@ -248,6 +268,8 @@ function fillPetForm(form, pet) {
   form.elements.age.value = pet.age;
   form.elements.weight.value = pet.weight;
   form.elements.notes.value = pet.notes;
+  form.elements.avatar.value = "";
+  renderAvatarPreview(form, pet.avatar);
 }
 
 function renderPet() {
@@ -264,6 +286,54 @@ function renderPet() {
   aiBreedTag.textContent = pet.breed;
   aiAgeTag.textContent = pet.age;
   fillPetForm(editPetForm, pet);
+  renderPetAvatars(pet.avatar);
+}
+
+function renderPetAvatars(avatar) {
+  document.querySelectorAll("[data-pet-avatar]").forEach((image) => {
+    const holder = image.closest(".pet-avatar");
+    if (avatar) {
+      image.src = avatar;
+      holder?.classList.add("has-image");
+    } else {
+      image.removeAttribute("src");
+      holder?.classList.remove("has-image");
+    }
+  });
+
+  document.querySelectorAll("[data-avatar-preview]").forEach((image) => {
+    const holder = image.closest(".pet-avatar");
+    if (avatar) {
+      image.src = avatar;
+      holder?.classList.add("has-image");
+    } else {
+      image.removeAttribute("src");
+      holder?.classList.remove("has-image");
+    }
+  });
+}
+
+function renderAvatarPreview(form, avatar) {
+  const preview = form.querySelector("[data-avatar-preview]");
+  const holder = preview?.closest(".pet-avatar");
+  if (!preview || !holder) return;
+
+  if (avatar) {
+    preview.src = avatar;
+    holder.classList.add("has-image");
+  } else {
+    preview.removeAttribute("src");
+    holder.classList.remove("has-image");
+  }
+}
+
+function readImageFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
 }
 
 function extractAllergy(notes) {

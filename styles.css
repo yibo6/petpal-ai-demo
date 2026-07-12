@@ -177,7 +177,7 @@ svg {
 
 .content {
   overflow-y: auto;
-  padding: 16px 16px 98px;
+  padding: 14px 14px 94px;
 }
 
 .screen {
@@ -186,7 +186,7 @@ svg {
 
 .screen.active {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .hero-panel,
@@ -217,6 +217,7 @@ svg {
   place-items: center;
   background: #e6f0ea;
   color: var(--teal-dark);
+  overflow: hidden;
 }
 
 .pet-avatar svg {
@@ -225,10 +226,32 @@ svg {
   stroke-width: 2.4;
 }
 
+.pet-avatar img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet-avatar.has-image img {
+  display: block;
+}
+
+.pet-avatar.has-image svg {
+  display: none;
+}
+
 .pet-avatar.small {
   width: 54px;
   height: 54px;
   border-radius: 18px;
+}
+
+.pet-avatar.large {
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
+  flex: 0 0 auto;
 }
 
 .block {
@@ -477,7 +500,8 @@ svg {
 }
 
 .pet-form.compact {
-  border-color: var(--teal);
+  border: 0;
+  padding: 12px 0 0;
 }
 
 .form-grid {
@@ -509,6 +533,67 @@ svg {
 
 .pet-form textarea {
   resize: none;
+}
+
+.avatar-upload {
+  display: flex !important;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f6faf8;
+  border: 1px dashed var(--line);
+  cursor: pointer;
+}
+
+.avatar-upload small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.avatar-upload input[type="file"] {
+  display: none;
+}
+
+.editor-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 14px;
+}
+
+.editor-panel summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.editor-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.editor-panel summary::after {
+  content: "+";
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--mint);
+  color: var(--teal-dark);
+}
+
+.editor-panel[open] summary::after {
+  content: "-";
 }
 
 .record-form {

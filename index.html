@@ -17,6 +17,24 @@
           </div>
 
           <form class="pet-form" id="create-pet-form">
+            <label class="avatar-upload">
+              <span class="upload-preview pet-avatar large">
+                <img data-avatar-preview alt="" />
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="34" r="20" fill="#fff7ee" />
+                  <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
+                  <path d="m46 25 8-11c.8-1.1-.3-2.6-1.6-2.1l-14 5.4" fill="#3f5f58" />
+                  <circle cx="25" cy="32" r="2.6" fill="#1f2d2a" />
+                  <circle cx="39" cy="32" r="2.6" fill="#1f2d2a" />
+                  <path d="M28 40c2.6 2.2 5.4 2.2 8 0" fill="none" stroke="#1f2d2a" stroke-width="3" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>
+                上传宠物头像
+                <small>用于首页和宠物档案展示</small>
+              </span>
+              <input type="file" name="avatar" accept="image/*" />
+            </label>
             <div class="form-grid">
               <label>
                 宠物名字
@@ -74,6 +92,7 @@
           <section class="screen active" id="home" aria-labelledby="home-tab">
             <div class="hero-panel">
               <div class="pet-avatar" aria-hidden="true">
+                <img data-pet-avatar alt="" />
                 <svg viewBox="0 0 64 64">
                   <circle cx="32" cy="34" r="20" fill="#fff7ee" />
                   <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
@@ -188,6 +207,7 @@
             <section class="profile-card">
               <div class="profile-main">
                 <div class="pet-avatar small" aria-hidden="true">
+                  <img data-pet-avatar alt="" />
                   <svg viewBox="0 0 64 64">
                     <circle cx="32" cy="34" r="20" fill="#fff7ee" />
                     <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
@@ -209,49 +229,66 @@
               </div>
             </section>
 
-            <form class="pet-form compact" id="edit-pet-form">
-              <div class="block-title">
-                <h3>编辑宠物档案</h3>
-                <span>保存到本地</span>
-              </div>
-              <div class="form-grid">
-                <label>
-                  宠物名字
-                  <input name="name" required />
+            <details class="editor-panel">
+              <summary>编辑宠物档案</summary>
+              <form class="pet-form compact" id="edit-pet-form">
+                <label class="avatar-upload">
+                  <span class="upload-preview pet-avatar large">
+                    <img data-avatar-preview alt="" />
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="34" r="20" fill="#fff7ee" />
+                      <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
+                      <path d="m46 25 8-11c.8-1.1-.3-2.6-1.6-2.1l-14 5.4" fill="#3f5f58" />
+                      <circle cx="25" cy="32" r="2.6" fill="#1f2d2a" />
+                      <circle cx="39" cy="32" r="2.6" fill="#1f2d2a" />
+                      <path d="M28 40c2.6 2.2 5.4 2.2 8 0" fill="none" stroke="#1f2d2a" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                  <span>
+                    更换宠物头像
+                    <small>仅用于头像展示，不做图片诊断</small>
+                  </span>
+                  <input type="file" name="avatar" accept="image/*" />
                 </label>
+                <div class="form-grid">
+                  <label>
+                    宠物名字
+                    <input name="name" required />
+                  </label>
+                  <label>
+                    种类
+                    <select name="species">
+                      <option>狗狗</option>
+                      <option>猫咪</option>
+                    </select>
+                  </label>
+                  <label>
+                    品种
+                    <input name="breed" required />
+                  </label>
+                  <label>
+                    性别
+                    <select name="gender">
+                      <option>公</option>
+                      <option>母</option>
+                    </select>
+                  </label>
+                  <label>
+                    年龄
+                    <input name="age" required />
+                  </label>
+                  <label>
+                    体重
+                    <input name="weight" required />
+                  </label>
+                </div>
                 <label>
-                  种类
-                  <select name="species">
-                    <option>狗狗</option>
-                    <option>猫咪</option>
-                  </select>
+                  过敏史 / 既往病史
+                  <textarea name="notes" rows="3"></textarea>
                 </label>
-                <label>
-                  品种
-                  <input name="breed" required />
-                </label>
-                <label>
-                  性别
-                  <select name="gender">
-                    <option>公</option>
-                    <option>母</option>
-                  </select>
-                </label>
-                <label>
-                  年龄
-                  <input name="age" required />
-                </label>
-                <label>
-                  体重
-                  <input name="weight" required />
-                </label>
-              </div>
-              <label>
-                过敏史 / 既往病史
-                <textarea name="notes" rows="3"></textarea>
-              </label>
-              <button type="submit" class="primary-button">保存档案</button>
-            </form>
+                <button type="submit" class="primary-button">保存档案</button>
+              </form>
+            </details>
 
             <section class="block">
               <div class="block-title">
