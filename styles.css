@@ -112,7 +112,8 @@ h3 {
 .icon-button,
 .tab,
 .quick-grid button,
-.ask-form button {
+.ask-form button,
+.record-form button {
   border: 0;
 }
 
@@ -346,7 +347,8 @@ svg {
 }
 
 .timeline,
-.suggestions {
+.suggestions,
+.record-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -425,6 +427,103 @@ svg {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
+}
+
+.record-form {
+  display: none;
+  gap: 10px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+}
+
+.record-form.active {
+  display: grid;
+}
+
+.record-form label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.record-form textarea {
+  width: 100%;
+  resize: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.record-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.primary-button,
+.secondary-button {
+  height: 42px;
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.primary-button {
+  background: var(--teal);
+  color: #fff;
+}
+
+.secondary-button {
+  background: #eef5f2;
+  color: var(--ink);
+}
+
+.record-list {
+  display: grid;
+  gap: 9px;
+}
+
+.record-list li {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f6faf8;
+}
+
+.record-type {
+  align-self: start;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--mint);
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.record-detail {
+  min-width: 0;
+}
+
+.record-detail strong,
+.record-detail span {
+  display: block;
+}
+
+.record-detail strong {
+  margin-bottom: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.record-detail span {
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .ask-form label {
