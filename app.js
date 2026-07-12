@@ -178,7 +178,7 @@ avatarInputs.forEach((input) => {
 const askForm = document.querySelector("#ask-form");
 const chatBox = document.querySelector(".chat-box");
 
-askForm.addEventListener("submit", (event) => {
+askForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const question = document.querySelector("#question").value.trim();
@@ -186,7 +186,6 @@ askForm.addEventListener("submit", (event) => {
 
   const pet = currentPet || defaultPet;
   const records = getRecords().slice(0, 3);
-  const recentContext = records.map((record) => `${record.type}：${record.detail}`).join("；");
 
   const userMessage = document.createElement("article");
   userMessage.className = "message user";
@@ -195,12 +194,25 @@ askForm.addEventListener("submit", (event) => {
   const aiMessage = document.createElement("article");
   aiMessage.className = "message ai";
   aiMessage.innerHTML = `
-    <p><strong>风险等级：低到中</strong></p>
-    <p>我会结合 ${escapeHtml(pet.name)} 的档案来判断：${escapeHtml(pet.breed)}，${escapeHtml(pet.age)}，体重 ${escapeHtml(pet.weight)}。最近记录显示：${escapeHtml(recentContext || "暂无新增记录")}。</p>
-    <p>建议继续记录饮食、排便和精神状态。如果 48 小时内没有改善，或同时出现呕吐、便血、精神下降，应及时咨询兽医。</p>
+    <p><strong>正在调用 AI...</strong></p>
+    <p>我会结合 ${escapeHtml(pet.name)} 的档案和最近健康记录生成建议。</p>
   `;
 
   chatBox.append(userMessage, aiMessage);
+  aiMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+  try {
+    const answer = await requestAiAdvice(question, pet, records);
+    aiMessage.innerHTML = formatAiAnswer(answer);
+  } catch (error) {
+    aiMessage.classList.add("error");
+    aiMessage.innerHTML = `
+      <p><strong>AI 调用失败</strong></p>
+      <p>${escapeHtml(error.message)}</p>
+      <p>如果你现在是用 file:// 打开的页面，请先运行本地服务，再访问 http://localhost:3000。</p>
+    `;
+  }
+
   aiMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
@@ -334,6 +346,47 @@ function readImageFile(file) {
     reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(file);
   });
+}
+
+async function requestAiAdvice(question, pet, records) {
+  if (window.location.protocol === "file:") {
+    throw new Error("真实 AI 需要通过本地服务访问，不能直接用 file:// 调用。");
+  }
+
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      question,
+      pet: {
+        name: pet.name,
+        species: pet.species,
+        breed: pet.breed,
+        gender: pet.gender,
+        age: pet.age,
+        weight: pet.weight,
+        notes: pet.notes,
+      },
+      records,
+    }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || "请求失败，请稍后再试。");
+  }
+
+  return data.answer || "AI 暂时没有返回内容，请稍后再试。";
+}
+
+function formatAiAnswer(answer) {
+  return escapeHtml(answer)
+    .split(/\n{2,}|\n/)
+    .filter(Boolean)
+    .map((line) => `<p>${line}</p>`)
+    .join("");
 }
 
 function extractAllergy(notes) {

@@ -477,6 +477,11 @@ svg {
   border: 1px solid var(--line);
 }
 
+.message.error {
+  border-color: #f3b7a8;
+  background: #fff4ef;
+}
+
 .message p + p {
   margin-top: 8px;
 }
