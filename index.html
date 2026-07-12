@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetPal AI - AI 宠物成长管家</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell" aria-label="PetPal AI 手机端 Demo">
+      <section class="phone">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">PetPal AI</p>
+            <h1 id="page-title">首页看板</h1>
+          </div>
+          <button class="icon-button" aria-label="通知提醒">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7" />
+              <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="content">
+          <section class="screen active" id="home" aria-labelledby="home-tab">
+            <div class="hero-panel">
+              <div class="pet-avatar" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="34" r="20" fill="#fff7ee" />
+                  <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
+                  <path d="m46 25 8-11c.8-1.1-.3-2.6-1.6-2.1l-14 5.4" fill="#3f5f58" />
+                  <circle cx="25" cy="32" r="2.6" fill="#1f2d2a" />
+                  <circle cx="39" cy="32" r="2.6" fill="#1f2d2a" />
+                  <path d="M28 40c2.6 2.2 5.4 2.2 8 0" fill="none" stroke="#1f2d2a" stroke-width="3" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <p class="label">今日状态</p>
+                <h2>Lucky 整体良好</h2>
+                <p class="muted">2 岁 4 个月 · 边牧 · 18.6kg</p>
+              </div>
+            </div>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>今日提醒</h3>
+                <span>4 项</span>
+              </div>
+              <div class="task-list">
+                <article class="task urgent">
+                  <div class="task-dot"></div>
+                  <div>
+                    <strong>今晚观察排便情况</strong>
+                    <p>昨日偏软 1 次，建议继续记录颜色和形态</p>
+                  </div>
+                </article>
+                <article class="task">
+                  <div class="task-dot"></div>
+                  <div>
+                    <strong>晚餐后记录饮食</strong>
+                    <p>记录粮食组成、食量和是否新增零食</p>
+                  </div>
+                </article>
+                <article class="task">
+                  <div class="task-dot"></div>
+                  <div>
+                    <strong>7 月 15 日体内驱虫</strong>
+                    <p>距离下次驱虫还有 3 天</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="quick-grid" aria-label="快捷记录">
+              <button data-action="饮食">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16l-1.5 9h-13L4 10Z" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                记录饮食
+              </button>
+              <button data-action="排便">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-2-1.2-3-3-3-5 0-3.3 2.7-6 6-6h4c3.3 0 6 2.7 6 6 0 2-1 3.8-3 5" /><path d="M8 18h8" /></svg>
+                记录排便
+              </button>
+              <button data-action="尿尿">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.3 6 11a6 6 0 0 1-12 0c0-4.7 6-11 6-11Z" /></svg>
+                记录尿尿
+              </button>
+              <button data-action="散步">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 18 5 21" /><path d="m16 18 3 3" /><path d="M8 11h8l2 7H6l2-7Z" /><path d="M9 8a3 3 0 0 1 6 0v3H9V8Z" /></svg>
+                记录散步
+              </button>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>最近健康概览</h3>
+                <span>近 3 天</span>
+              </div>
+              <div class="metrics">
+                <div><span>食欲</span><strong>正常</strong></div>
+                <div><span>排便</span><strong>偏软 1 次</strong></div>
+                <div><span>排尿</span><strong>正常</strong></div>
+                <div><span>运动</span><strong>30 分钟</strong></div>
+              </div>
+            </section>
+
+            <section class="ai-insight">
+              <div class="insight-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 14 9l6 2-6 2-2 6-2-6-6-2 6-2 2-6Z" /></svg>
+              </div>
+              <div>
+                <h3>AI 风险提示</h3>
+                <p>最近 2 天大便略软，且周三有换粮记录，可能与换粮有关。建议继续观察 1-2 天；如出现持续腹泻、呕吐或精神下降，建议咨询兽医。</p>
+              </div>
+            </section>
+          </section>
+
+          <section class="screen" id="profile" aria-labelledby="profile-tab">
+            <section class="profile-card">
+              <div class="profile-main">
+                <div class="pet-avatar small" aria-hidden="true">
+                  <svg viewBox="0 0 64 64">
+                    <circle cx="32" cy="34" r="20" fill="#fff7ee" />
+                    <path d="M18 25 10 14c-.8-1.1.3-2.6 1.6-2.1l14 5.4" fill="#3f5f58" />
+                    <path d="m46 25 8-11c.8-1.1-.3-2.6-1.6-2.1l-14 5.4" fill="#3f5f58" />
+                    <circle cx="25" cy="32" r="2.6" fill="#1f2d2a" />
+                    <circle cx="39" cy="32" r="2.6" fill="#1f2d2a" />
+                    <path d="M28 40c2.6 2.2 5.4 2.2 8 0" fill="none" stroke="#1f2d2a" stroke-width="3" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div>
+                  <h2>Lucky</h2>
+                  <p>边境牧羊犬 · 公 · 2 岁 4 个月</p>
+                </div>
+              </div>
+              <div class="profile-stats">
+                <div><span>体重</span><strong>18.6kg</strong></div>
+                <div><span>绝育</span><strong>已完成</strong></div>
+                <div><span>过敏</span><strong>鸡肉</strong></div>
+              </div>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>疫苗记录</h3>
+                <span>已完成</span>
+              </div>
+              <ul class="timeline">
+                <li><strong>狂犬疫苗</strong><span>2026.03.12</span></li>
+                <li><strong>犬六联</strong><span>2026.03.12</span></li>
+                <li><strong>下一次加强针</strong><span>2027.03.12</span></li>
+              </ul>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>驱虫与体检</h3>
+                <span>待跟进</span>
+              </div>
+              <ul class="timeline">
+                <li><strong>体内驱虫</strong><span>2026.07.15</span></li>
+                <li><strong>体外驱虫</strong><span>2026.08.01</span></li>
+                <li><strong>年度体检</strong><span>本周预约</span></li>
+              </ul>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>健康备注</h3>
+              </div>
+              <p class="note">近期换粮中，建议记录排便颜色、形态和稀度。既往无重大疾病史，鸡肉零食可能引起皮肤瘙痒。</p>
+            </section>
+          </section>
+
+          <section class="screen" id="chat" aria-labelledby="chat-tab">
+            <section class="context-card">
+              <p class="label">AI 已参考</p>
+              <div class="context-tags">
+                <span>边牧</span>
+                <span>2 岁 4 个月</span>
+                <span>近期换粮</span>
+                <span>昨日软便</span>
+              </div>
+            </section>
+
+            <section class="chat-box" aria-label="AI 照护问答示例">
+              <article class="message user">
+                <p>Lucky 昨天大便有点软，今天要不要停掉新粮？</p>
+              </article>
+              <article class="message ai">
+                <p><strong>风险等级：低到中</strong></p>
+                <p>结合近期记录，软便可能与周三换粮有关。建议先不要突然停粮，可以把新粮比例降到 25%，观察 1-2 天。</p>
+                <p>如果出现持续腹泻、呕吐、精神下降或便血，请尽快联系兽医。</p>
+              </article>
+            </section>
+
+            <form class="ask-form" id="ask-form">
+              <label for="question">输入养宠问题</label>
+              <textarea id="question" rows="4">我家狗狗最近换粮后大便变软，应该怎么调整？</textarea>
+              <button type="submit">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7Z" /><path d="M22 2 11 13" /></svg>
+                生成 AI 建议
+              </button>
+            </form>
+          </section>
+
+          <section class="screen" id="report" aria-labelledby="report-tab">
+            <section class="report-summary">
+              <p class="label">本周健康周报</p>
+              <h2>整体稳定，需继续观察排便</h2>
+              <p>本周记录 5 天，发现 1 个轻微异常，运动完成度较好。</p>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>本周趋势</h3>
+                <span>7.6 - 7.12</span>
+              </div>
+              <div class="trend-list">
+                <div><span>饮食</span><div class="bar"><i style="width: 88%"></i></div><strong>稳定</strong></div>
+                <div><span>排便</span><div class="bar warning"><i style="width: 58%"></i></div><strong>偏软</strong></div>
+                <div><span>运动</span><div class="bar"><i style="width: 76%"></i></div><strong>良好</strong></div>
+                <div><span>精神</span><div class="bar"><i style="width: 92%"></i></div><strong>活跃</strong></div>
+              </div>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>AI 总结</h3>
+              </div>
+              <p class="note">Lucky 本周整体状态稳定，食欲和精神状态良好。周三开始换粮后，周五出现一次软便，建议下周放慢换粮节奏，并继续记录排便颜色、形态和稀度。</p>
+            </section>
+
+            <section class="block">
+              <div class="block-title">
+                <h3>下周建议</h3>
+              </div>
+              <ul class="suggestions">
+                <li>新粮比例维持在 25%-50%，避免突然增加。</li>
+                <li>7 月 15 日完成体内驱虫，并记录用药品牌。</li>
+                <li>保持每周 5 次以上散步，每次 30 分钟左右。</li>
+              </ul>
+            </section>
+          </section>
+        </div>
+
+        <nav class="tabbar" aria-label="主导航">
+          <button class="tab active" id="home-tab" data-target="home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21H3V10.5Z" /><path d="M9 21v-7h6v7" /></svg>
+            首页
+          </button>
+          <button class="tab" id="profile-tab" data-target="profile">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19c1.5-4 14.5-4 16 0" /><circle cx="12" cy="8" r="4" /></svg>
+            档案
+          </button>
+          <button class="tab" id="chat-tab" data-target="chat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z" /><path d="M8 9h8M8 13h5" /></svg>
+            问 AI
+          </button>
+          <button class="tab" id="report-tab" data-target="report">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4h16v16H4Z" /><path d="M8 16V9M12 16V7M16 16v-4" /></svg>
+            周报
+          </button>
+        </nav>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
