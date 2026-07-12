@@ -1,50 +1,66 @@
-# PetPal AI Product Brief
+# PetPal AI 产品说明
 
-## One-Line Pitch
+## 一句话介绍
 
-PetPal AI is an AI pet growth manager that helps pet owners track health, manage care reminders, and get personalized daily care guidance.
+PetPal AI 是一款 AI 宠物成长管家，帮助宠物主人记录健康状态、管理照护提醒，并获得个性化日常养宠建议。
 
-## Target Users
+## 目标用户
 
-- New pet owners who need structured guidance
-- Cat and dog owners who want to track health changes
-- Multi-pet families who need reminders and records
-- Busy owners who forget vaccines, deworming, and routine care
+- 新手养宠人，需要更清晰的照护指导
+- 猫狗主人，希望持续记录宠物健康变化
+- 多宠家庭，需要统一管理多只宠物的提醒和档案
+- 工作繁忙、容易忘记疫苗、驱虫、体检等事项的宠物主人
 
-## User Pain Points
+## 用户痛点
 
-- Pet health records are scattered across notes, photos, and memory
-- Owners are unsure whether symptoms are minor or require a vet visit
-- Vaccine, deworming, grooming, and checkup schedules are easy to forget
-- Long-term growth changes are hard to observe without structured records
+- 宠物健康记录分散在备忘录、相册和聊天记录里，难以长期追踪
+- 宠物出现异常症状时，主人不知道是继续观察还是尽快就医
+- 疫苗、驱虫、洗澡、剪指甲、体检等日常照护事项容易忘记
+- 宠物成长变化缺少结构化总结，难以发现体重、饮食、精神状态等趋势
 
-## MVP Scope
+## MVP 功能范围
 
-1. Pet profile
-2. Health record dashboard
-3. AI care question and answer
-4. Weekly growth report
+1. **宠物档案**
+   记录宠物姓名、种类、品种、生日、体重、疫苗、驱虫、过敏史等基础信息。
 
-## AI Capabilities
+2. **首页健康看板**
+   展示今日宠物状态、待办提醒、近期健康记录和异常提示。
 
-- Personalized advice based on pet age, breed, weight, and recent records
-- Symptom triage with low, medium, and high risk levels
-- Weekly summary generation from daily records
-- Reminder suggestions for vaccines, deworming, grooming, and checkups
+3. **AI 照护问答**
+   用户输入问题后，AI 根据宠物档案和近期记录给出照护建议、观察重点和风险等级。
 
-## Key Metrics
+4. **成长周报**
+   自动总结一周内的饮食、体重、精神状态、异常记录和下周建议。
 
-- Pet profile completion rate
-- First health record completion rate
-- Weekly active record days
-- AI chat usage rate
-- Reminder completion rate
-- Weekly report open rate
+## AI 能力设计
 
-## Growth Experiments
+- 基于宠物年龄、品种、体重和近期记录生成个性化建议
+- 对常见异常症状进行低 / 中 / 高风险分级
+- 自动生成每周成长总结
+- 根据健康记录推荐疫苗、驱虫、体检、清洁等提醒
 
-- A/B test onboarding copy to improve profile completion
-- Compare reminder timing to improve care task completion
-- Test AI chat entry points on the home dashboard
-- Test weekly report formats to increase retention
+## 核心指标
+
+- 新用户宠物建档完成率
+- 首次健康记录完成率
+- 每周主动记录天数
+- AI 问答使用率
+- 提醒完成率
+- 成长周报打开率
+
+## 增长实验设计
+
+- 测试不同新手引导文案，提升宠物建档完成率
+- 测试不同提醒时间和频率，提升照护任务完成率
+- 测试首页 AI 问答入口位置，提升 AI 功能使用率
+- 测试不同周报呈现形式，提升用户留存和回访率
+
+## 求职展示重点
+
+这个项目不仅是一个宠物 App Demo，更重点展示：
+
+- 能否发现真实用户场景中的 AI 应用机会
+- 能否把 AI 能力转化为具体产品流程
+- 是否理解 App 用户增长、留存和转化指标
+- 是否具备独立完成 AI Demo、原型和产品说明的能力
 

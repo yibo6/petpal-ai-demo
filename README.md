@@ -1,32 +1,37 @@
 # PetPal AI
 
-AI-powered mobile web demo for pet health, growth tracking, and daily care.
+**AI 宠物成长管家：帮助宠物主人管理宠物健康、成长记录和日常照护的手机端 Web Demo。**
 
-PetPal AI is a portfolio demo designed for AI product management and AI application internship roles. It shows how an AI-native mobile experience can help pet owners manage daily care, health records, reminders, and personalized advice.
+PetPal AI 是一个面向 **AI 产品经理 / AI 应用实习** 岗位的个人作品集项目。项目以宠物照护场景为切入点，展示如何将 AI 能力落地到真实用户流程中，包括健康记录、照护提醒、AI 问答、成长周报和用户留存设计。
 
-## Project Goal
+## 项目目标
 
-Build a mobile-first web demo that looks and feels like an app, while remaining easy to share through GitHub and a live web link.
+做一个看起来像手机 App、但技术上用网页实现的 Demo，方便放在 GitHub、简历和作品集中展示。
 
-## Core Demo Pages
+## 核心页面
 
-- Home dashboard: pet status, care reminders, and health overview
-- Pet profile: basic pet information, medical notes, vaccine and deworming records
-- AI care chat: simulated AI advice based on pet profile and recent symptoms
-- Growth report: weekly summary, trends, risks, and next-step suggestions
+- **首页看板**：展示宠物今日状态、待办提醒、健康概览
+- **宠物档案**：记录宠物基础信息、疫苗、驱虫、过敏史和健康备注
+- **AI 照护问答**：根据宠物信息和用户描述，模拟生成照护建议和风险提示
+- **成长周报**：自动总结一周健康变化、异常记录和下周建议
 
-## Product Skills Demonstrated
+## 展示能力
 
-- AI product thinking
-- Mobile app information architecture
-- User activation and retention design
-- Health and care scenario mapping
-- AI response design with risk-level guidance
-- Metrics design for growth experiments
+- AI 产品设计能力
+- 手机端 App 信息架构设计
+- 用户激活、留存和增长思维
+- 宠物健康与日常照护场景拆解
+- AI 问答、风险分级和提醒机制设计
+- 核心指标与 A/B 测试实验设计
 
-## Target Roles
+## 适配岗位
 
-- App Product Manager, AI direction
-- AI Application Intern
-- AI Product Intern
+- APP 产品经理（AI 方向）
+- AI 应用实习
+- AI 产品实习
+- 用户增长 / 内容运营 / AI Workflow 相关岗位
+
+## 项目状态
+
+当前阶段：产品定位与项目骨架已完成，下一步将开发手机端 Web Demo。
 
